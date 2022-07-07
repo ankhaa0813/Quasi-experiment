@@ -2,11 +2,11 @@
 # for data cleaning and analysis 
 import pandas as pd 
 import numpy as np
-# These packages will be used for main econometric analysis 
+# These libraries will be used for main econometric analysis 
 import statsmodels as sm 
 import statsmodels.formula.api as smf
 import linearmodels.iv as IV
-# main data will be called from this package which is also available in R software with same name
+# main data will be called from this library which is also available in R software with same name
 # it is very easy accessible from different development environment such as JupiterNote, VScode
 import wooldridge
 #for visualiazation 
@@ -29,7 +29,7 @@ educ_hat=fst_sta.fittedvalues
 sec_for ='lwage~educ_hat+IQ+exper+black+married+fatheduc+motheduc'
 sec_sta =smf.ols(sec_for,data=card ).fit()
 sec_sta.summary()  
-# In order to implement IV regression with package, you need to use bracket for your endogenous variable, 
+# In order to implement IV regression with library, you need to use bracket for your endogenous variable, 
 # for this case educ, and isntrumenttal variable, nearc4
 main_equation='lwage~1+IQ+exper+black+married+fatheduc+motheduc+[educ~nearc4]'
 main_results =IV.IV2SLS.from_formula(main_equation,data=card ).fit()
