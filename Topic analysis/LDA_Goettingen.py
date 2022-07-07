@@ -7,11 +7,11 @@ from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
 import pyLDAvis
 import pyLDAvis.gensim_models
-#I will implement simple topic analysis to estimate the public opinion about the Goettingen city in twitter using tweets about the city. 
-# I downloaded the all tweets (just 3.9K 😉) which is tweeted in last week and contained key word Goettingen through Twarc library. 
+#I will implement simple topic analysis to estimate the public opinion about the Boris Johson in twitter using tweets about the city. 
+# I downloaded the 10 thousand tweets which is tweeted in last week and contained key word Boris Johson through Twarc library. 
 # I prepared overview of LDA, common topic analysis' technique in the readme file.
 
-data=pd.read_csv('goettingen.csv')
+data=pd.read_csv('boris_tweets.csv')
 data.head
 #Extracting only tweet texts from full dataset which contain all meta datas about twitter
 lda_data=data['text']
@@ -22,7 +22,7 @@ from nltk.corpus import stopwords #downloading pre-defined stopwords
 stop_words = stopwords.words('english')
 #Adding some words to stopwords such as key terms and some words that don't contain any information. for example in tweets corpus which is collected with key terms about goettingen
 # Since key terms are in every tweet, we can't make any conclusion from that
-stop_words.extend(['Goettingen','https'])  #additional
+stop_words.extend(['boris','johnson', 'minister','https'])  #additional
 from gensim.utils import simple_preprocess
 #Defining a new function which is going to be used to transform dataset
 # deacc=True removes punctuations
@@ -44,12 +44,10 @@ data_words = list(sent_to_words(lda_data)) #transform data set word by word
 print(data_words[:1][0][:30])
 data_words = remove_stopwords(data_words) # removing stopwords
 print(data_words[:1][0][:30])
-print(data_words)
 
 import gensim.corpora as corpora
 #Donwloading data and creating bag of words which is list of unique words and their frequency 
 id2word = corpora.Dictionary(data_words)
-print(id2word)
 # Create Corpus
 texts = data_words
 # Term Document Frequency
@@ -60,7 +58,7 @@ word_example= id2word[1][:1][0]
 print(word_example)
 # 0 corresponds to index of the words and their frequency 
 # defining number of topics number of topics
-num_topics = 20
+num_topics = 20 # Number of topics are quite arbitrary. But you can experiment several option and choose the one with better performance
 # Build LDA model
 lda_model = gensim.models.LdaMulticore(corpus=corpus,
                                        id2word=id2word,
@@ -68,6 +66,6 @@ lda_model = gensim.models.LdaMulticore(corpus=corpus,
 # Print the Keyword in the 10 topics
 print(lda_model.print_topics())
 doc_lda = lda_model[corpus]
-
+#pyLDAvis command shows the estimated topics with its frequency as comparing simple PCA results
 vis = pyLDAvis.gensim_models.prepare(lda_model, corpus, id2word, mds="mmds", R=30)
 pyLDAvis.save_html(vis, 'LDA_Visualization.html')
