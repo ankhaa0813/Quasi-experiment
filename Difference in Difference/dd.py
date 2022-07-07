@@ -1,90 +1,49 @@
 
-import pandas as pd
-import wooldridge
-import statsmodels as sm
+# for data cleaning and analysis 
+from sre_parse import DIGITS
+import pandas as pd 
 import numpy as np
-from sklearn.linear_model import LinearRegression
+# These packages will be used for main econometric analysis 
+import statsmodels as sm 
 import statsmodels.formula.api as smf
+# main data will be called from this package which is also available in R software with same name
+# it is very easy accessible from different development environment such as JupiterNote, VScode
+import wooldridge
+#for visualiazation 
 import matplotlib.pyplot as plt
-import seaborn as sns
+# calling data
 housing=wooldridge.data('kielmc')
-df = wooldridge.data('kielmc', description=True)
-housing.head
-# Data is used from Kiel and Mcclain(1995) which is used in Wooldrige book 
-# We will estimate effect of building a new incinerator on housing prices in North Andover, Massachusetts. 
-# The rumor about building a new incinerator began after 1978, construction began in 1981. 
-# We will compare difference between before and after the rumor and difference between houses located close to incinerator as treatment and more distant ones as control
+# #data descriptionn
+housing = wooldridge.data('kielmc', description=True)
+# save it as data frame using panda
 house=pd.DataFrame(housing)
-y=housing['price']
-x= house.loc["age","rooms", "area", "nbh", "nearinc"]
-control=house.loc["age","rooms", "area", "nbh"]
-lr=LinearRegression()
-house['loca']=house.nearinc,map({1:'near', 0:'far'})
-#pd.get_dummies(train, columns=["Sex", "Embarked"], drop_first=True)
-pd.get_dummies(house.year) #column for each possible answer
-pd.get_dummies(house.year).iloc[:,1:] #drop first column first : mean all columns 
-pd.get_dummies(house.year, prefix='Post').iloc[:,1:] #add prefix into the name
-# pd concat addd row to the variable to the original data frame axis-=1 for columns axis=0 for the rows s
-
-house['year1']=house['year'].replace([1978],'pre')
-house['year1']=house['year'].replace([1981],'post')
+# to see the first few rows of data
 house.head
-xb['nearinc']=xb['nearinc'].replace(['1'],'near to incinerator ')
-
-def post(time, treatment):
-    if time>treatment:
-        return 1
-    if time<=treatment:
-        return 0
-treatment=1978
-year=house['year']
-house["year"]=post(year, treatment)
-print(year)
-print(treatment)
-house["po"]=house['nearinc']*house['y81']
-results = smf.ols('lrprice ~ y81*nearinc+age+area+rooms+nbh',data=house ).fit()
-print(results.summary())
-aa=results.fittedvalues
-xa=pd.DataFrame(house.groupby(['nearinc', 'year']).agg({'rprice': ['mean']}))
-
-print(xb)
-print(xb['rpice'])
-xb=xb.rows.droplevel(level=0)
-house.columns
-hous=house[['year','nearinc','rprice']]
-y=hous.groupby(['year','nearinc']).mean()
-xb=y.reset_index()
-
-print(xb)
-xb.columns
-xb['nearinc']=xb['nearinc'].replace([0],'far from incinerator ')
-xb['nearinc']=xb['nearinc'].replace([1],'near to incinerator ')
-a=pd.DataFrame{(x['rprice'],y['rprice']),index=[1978, 1981]}
-xb.plot.line('year rpice)
-print(lines)
-xb.plot.line()
-sns.lineplot(data = xb, x = 'year', y = 'rprice', hue = 'nearinc')
-plt.show()
-print(xb)
-xb.set_index('year', inplace=True)
-xb.groupby('nearinc')['rprice'].plot(legend=True)
-plt.plot(house.year, house.rprice)
-plt.show()
-
-plt.plot(xb.year, xb.rprice)
-ax1=fig.add_subplot(11)
-near=ax1.plot(xb.rprice)
-plt.show()
-
-p_df = pd.DataFrame({"class": classes, "vals": vals})
-
-fig, ax = plt.subplots(figsize=(8,6))
-for label, df in xb.groupby('nearinc'):
-    xb.rprice.plot(kind="kde", ax=ax, label=label)
-plt.show()
-print(xb)
-plt.figure(figsize = (10, 5))
-xb.set_index('year', inplace=True)
-plt.axvline(x = 1979, color = 'b', label = 'axvline - full height')
-xb.groupby('nearinc')['rprice'].plot(legend=True)
+# dummy variable plays important role in DinD estimation, u can create dummy variable same as below. But we don't use it now because 
+# we have already pcreated variables in dataset we downloaded from wooldridge package
+# it is easy to define estimation equation beforehand. We can just create interaction term with * sign within formula like R
+basic ='rprice~y81+nearinc+y81*nearinc'
+# I don't want waste time on explaining variables which can be found from result of code in line 15
+r_basic = smf.ols(basic,data=house ).fit()
+#r_basic = smf.ols(rprice~y81+nearinc+y81*nearinc,data=house ).fit() # you can also do it without formula
+r_basic.summary() # we can find exact same result with Wooldridge book
+# I hope u can explain the result. otherwise you can find from the Wooldridge book. 
+#Adding some controls
+basic_control ='rprice~y81+nearinc+y81*nearinc+age+agesq'
+# I don't want waste time on explaining variables which can be found from result of code in line 15
+r_basic_control = smf.ols(basic_control,data=house ).fit()
+r_basic_control.summary()
+# Drawing graph showing mean of house price before and after the rumor
+hous=house[['year','nearinc','rprice']] #creating subsample to make process easy
+y=hous.groupby(['year','nearinc']).mean() #finding mean of subsample using year and nearinc with panda package
+plot1=y.reset_index() #formating table index
+print(plot1)
+#replacing value of the variable nearinc to make graph more understanbale 
+plot1['nearinc']=plot1['nearinc'].replace([0],'Far from incinerator ')
+plot1['nearinc']=plot1['nearinc'].replace([1],'Near to incinerator ')
+# Creating plot with matplotlib
+plt.figure(figsize = (10, 5)) #defining size of the plot
+plot1.set_index('year', inplace=True) #defining index of the plot or x axis
+plt.axvline(x = 1979, color = 'b', label = '') # drawing vertical line
+plot1.groupby('nearinc')['rprice'].plot(legend=True)  # main part for the plot assigning main variable that we want to see in the graph
 plt.show()
