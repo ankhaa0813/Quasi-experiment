@@ -1,9 +1,9 @@
 ### Instrumental Variable 
-Here,  I will try to show how to conduct instrument variable, specifically 2SLS, approach using Python programming language.
+Here,  I will try to show how to implement Instrumental variable approach, specifically 2SLS, approach using Python programming language.
 
 Instrumental variable is very common approach to identify causal relationship among economic variables when dealing with endogenous explanatory variable. 
 
-Example from from Introductory econometrics by Jeffrey Wooldridge (2018) chapter will be used here for coding. Card (1995) estimated return to education using instrumental variable. For this case, education is the endogenous explanatory variable. Instrumental variable is whether someone grew up near a four year college. As following exclusion restriction, growing up in near a four year college can only affect return to education that is measured as salary through education. I am sure that you have some questions and counterarguments about methodology, I will recommend you to look for original paper that is included in the reference below, and the book.
+Example from Introductory econometrics by Jeffrey Wooldridge (2018) chapter will be used here for coding. Card (1995) estimated return to education using instrumental variable. For this case, education is the endogenous explanatory variable. Instrumental variable is whether someone grew up near a four year college. As following exclusion restriction, growing up in near a four year college can only affect return to education that is measured as salary through education. I am sure that you have some questions and counterarguments about methodology in this case I will recommend you to look for original paper that is included in the reference below, and the book.
 
 Detailed explanation of the code will be found from python file as comment.
 
