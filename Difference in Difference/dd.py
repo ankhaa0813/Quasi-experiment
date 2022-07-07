@@ -11,7 +11,8 @@ import statsmodels.formula.api as smf
 import wooldridge
 #for visualiazation 
 import matplotlib.pyplot as plt
-# calling data
+# calling data]
+# Information about  DATA and METHODOLOGY are found from README file
 housing=wooldridge.data('kielmc')
 # #data descriptionn
 housing = wooldridge.data('kielmc', description=True)

@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 # calling data and its description
 card=wooldridge.data('card')
 # save it as data frame using panda
+# Information about  DATA and METHODOLOGY are found from README file
 card=pd.DataFrame(card)
 #data description
 df = wooldridge.data('card', description=True)

@@ -7,12 +7,11 @@ from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
 import pyLDAvis
 import pyLDAvis.gensim_models
-#I downloaded 15 thousand tweets from Twitter in last week using key words in key word txt file. 
-#Keywords are Goettingen, Development economics, Economics, Master program
-#We will conduct topic analysis to see how Development economics program in Goettingen Universtiy look like in twitter. 
-#Tweets about Development economics program in Goettingen Universtiy will be used for LDA, topic analysis. 
+#I will implement simple topic analysis to estimate the public opinion about the Goettingen city in twitter using tweets about the city. 
+# I downloaded the all tweets (just 3.9K 😉) which is tweeted in last week and contained key word Goettingen through Twarc library. 
+# I prepared overview of LDA, common topic analysis' technique in the readme file.
 
-data=pd.read_csv('obama10k.csv')
+data=pd.read_csv('goettingen.csv')
 data.head
 #Extracting only tweet texts from full dataset which contain all meta datas about twitter
 lda_data=data['text']
@@ -23,7 +22,7 @@ from nltk.corpus import stopwords #downloading pre-defined stopwords
 stop_words = stopwords.words('english')
 #Adding some words to stopwords such as key terms and some words that don't contain any information. for example in tweets corpus which is collected with key terms about goettingen
 # Since key terms are in every tweet, we can't make any conclusion from that
-stop_words.extend(['Goettingen', 'development','economics','https'])  #additional
+stop_words.extend(['Goettingen','https'])  #additional
 from gensim.utils import simple_preprocess
 #Defining a new function which is going to be used to transform dataset
 # deacc=True removes punctuations
