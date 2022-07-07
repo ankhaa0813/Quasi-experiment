@@ -1,6 +1,6 @@
 ### Topic analysis
 
-I will implement simple topic analysis to estimate the public opinion about the Goettingen university in twitter using tweets about the university. I downloaded the tweets in last through Twarc library. Below, I prepared overview of LDA, common topic analysis' technique. 
+I will implement simple topic analysis to estimate the public opinion about the Goettingen city in twitter using tweets about the city. I downloaded the 10 thousand tweets which is tweeted in last week and contained key word Goettingen through Twarc library. Below, I prepared overview of LDA, common topic analysis' technique. 
 
 
 ### Latent Drichilet Model
