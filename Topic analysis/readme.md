@@ -1,7 +1,8 @@
 ### Topic analysis
 
-I will implement simple topic analysis to estimate the public opinion about the Goettingen city in twitter using tweets about the city. I downloaded the 10 thousand tweets which is tweeted in last week and contained key word Goettingen through Twarc library. Below, I prepared overview of LDA, common topic analysis' technique. 
+I will implement simple topic analysis to estimate the public opinion about the Goettingen city in twitter using tweets about the city. I downloaded the all tweets (just 3.9K 😉) which is tweeted in last week and contained key word Goettingen through Twarc library. Below, I prepared overview of LDA, common topic analysis' technique. 
 
+#### You can find result of the analysis as HTML file from the same folder 
 
 ### Latent Drichilet Model
 LDA is unsupervised topic modelling as well as one of the most common NLP techniques. It assumes each document as a random mixture of latent topics and clusters words
