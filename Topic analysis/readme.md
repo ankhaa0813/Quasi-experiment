@@ -16,3 +16,9 @@ Intuition behind the topic model is explained well in [Bybee et al., 2021] work.
 
 Topic model, LDA, functions as a dimension reduction technique same as a principal omponent analysis(PCA). This is why sometimes it is called “generative” a model. It
 reduces high dimensional textual data to relatively low dimensional topics, which consist f clusters of words. But the formations of clusters are unsupervised and defined to reserve as much of information as possible from the original corpus which is measured in variation in word usage across an article. The note is that it quantifies how much proportion of each document is dedicated to each topic. In other words, the amount of news attention allocated to each topic is defined at a document level.
+
+### Reference
+
+[Blei et al., 2003] Blei, D. M., Ng, A. Y., and Jordan, M. I. (2003). Latent dirichlet allocation. Journal of machine Learning research, 3(Jan):993–1022.
+[Bybee et al., 2021] Bybee, L., Kelly, B. T., Manela, A., and Xiu, D. (2021). Business news and business cycles. Technical report.
+
