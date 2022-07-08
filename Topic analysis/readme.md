@@ -1,6 +1,6 @@
 ### Topic analysis
 
-I implement simple topic analysis to estimate the public opinion about the Boris Johson in twitter using tweets about him. I downloaded 10 thousand tweets which is tweeted in last week and contained key word Boris Johson through Twarc library. Below, I prepared overview of LDA, common topic analysis' technique. 
+I implement simple topic analysis to estimate the public opinion about the Boris Johson in twitter using tweets about him. I downloaded 10 thousand tweets which is tweeted in last week and contained a key word Boris Johson through Twarc library. Below, I prepared overview of LDA, topic analysis' common technique. 
 
 ### Latent Drichilet Model
 LDA is unsupervised topic modelling as well as one of the most common NLP techniques. It assumes each document as a random mixture of latent topics and clusters words
