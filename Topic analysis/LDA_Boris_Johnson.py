@@ -7,7 +7,7 @@ from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
 import pyLDAvis
 import pyLDAvis.gensim_models
-#I will implement simple topic analysis to estimate the public opinion about the Boris Johson in twitter using tweets about the city. 
+#I will implement simple topic analysis to estimate the public opinion about the Boris Johson in twitter using tweets about him. 
 # I downloaded the 10 thousand tweets which is tweeted in last week and contained key word Boris Johson through Twarc library. 
 # I prepared overview of LDA, common topic analysis' technique in the readme file.
 
