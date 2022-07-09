@@ -1,9 +1,9 @@
 ### Examples of how to implement Quasi/Natural experiment approaches using Python 
 
-I tried to give you examples and possible libraries which might be helpful to conduct DinD and Instumental variable approaches, the most common ones of Quasi experiment. 
-You will not find detailed explanation of these methods from following readme files and python files. Because I am assuming that you have already know how to do it in other softwares such as STATA, EVIEWS, and SAS. 
+I tried to give you examples and possible libraries which might be helpful to conduct DinD and Instrumental variable approaches, the most common ones of Quasi-experiment. 
+You will not find detailed theoretical explanation of these methods from following readme files and python files. Because I am assuming that you have already know how to do it in other softwares such as STATA, EVIEWS, and SAS. 
 
-If u are interested in the methodology and learn about it, I would recommend you three books in reference to read.
+If u are interested in the methodology and learning about it, I would recommend you three books in reference as further reading.
 
 
 ## References
